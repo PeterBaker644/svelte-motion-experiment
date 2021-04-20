@@ -2,7 +2,7 @@
   // This export pulls in the name from main.js
 	// export let name;
   import { spring } from 'svelte/motion';
-  import Card from "./components/Card.svelte";
+  import Card from "./components/Card(old).svelte";
   import Cube from './components/Cube.svelte';
 
 	let size = spring(10);
