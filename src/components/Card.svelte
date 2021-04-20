@@ -1,53 +1,45 @@
 <script>
-  // export let coords;
-  import { spring } from 'svelte/motion';
-  let coords = spring({ x: 50, y: 50 }, {
-		stiffness: 0.07,
-		damping: 0.3
+	import { spring } from 'svelte/motion';
+	import { pannable } from './pannable.js';
+	export let setCoords = {x: 0, y: 0};
+	const coords = spring({ x: setCoords.x, y: setCoords.y }, {
+		stiffness: 0.02,
+		damping: 0.4
 	});
+
   let card = {
     width:200,
     height:280
   };
 
-  let down = false;
-
-	function handleMousedown(event) {
-    coords.update(() => ({
-			x: event.clientX,
-			y: event.clientY
-		}));
-    down = true;
-    coords.stiffness = coords.damping = 0.4;
+	function handlePanStart() {
+		coords.stiffness = coords.damping = 1;
 	}
 
-	function handleMousemove(event) {
-		const dx = event.clientX - $coords.x;
-		const dy = event.clientY - $coords.y;
-		// console.log("x",x,"y",y,"dx",dx,"dy",dy);
-    coords.update(() => ({
-			x: event.clientX,
-			y: event.clientY
+	function handlePanMove(event) {
+		coords.update($coords => ({
+			x: $coords.x + event.detail.dx,
+			y: $coords.y + event.detail.dy
 		}));
 	}
 
-	function handleMouseup(event) {
-    coords.update(() => ({
-			x: event.clientX,
-			y: event.clientY
-		}));
-    down = false;
+	function handlePanEnd(event) {
+		coords.stiffness = 0.2;
+		coords.damping = 0.4;
+		coords.set({ x: 0, y: 0 });
 	}
-
 </script>
 
-<div class="card" style="
-transform:translate({$coords.x - card.width/2}px,{$coords.y - card.height/2}px);
-height:{card.height}px;
-width:{card.width}px;"
-on:mousemove="{down ? handleMousemove : ''}"
-on:mousedown|preventDefault="{handleMousedown}"
-on:mouseup="{handleMouseup}"
+<div class="card"
+	use:pannable
+	on:panstart={handlePanStart}
+	on:panmove={handlePanMove}
+	on:panend={handlePanEnd}
+	style="transform:
+		translate({$coords.x}px,{$coords.y}px)
+		rotate({($coords.x * 0.1)}deg);
+    height:{card.height}px;
+    width:{card.width}px;"
 >
   <h2>Monster Name</h2>
   <div class="image">Fake Image</div>
@@ -58,21 +50,27 @@ on:mouseup="{handleMouseup}"
 </div>
 
 <style>
-
   h2,p {
     margin: 0em;
   }
 
-  .card {
-    position: absolute;
+  h2 {
     color: #ff3e00;
+  }
+
+	.card {
+		position: absolute;
+		left: calc(50% - 200px / 2);
+		bottom: calc(15% - 280px / 2);
+		border-radius: 4px;
     border: 0.2em solid black;
     border-radius: 0.4em;
     background-color: rgba(255, 255, 255, 0.7);
     display: grid;
     gap: 0;
     align-items: center;
-  }
+		cursor: move;
+	}
 
   .details {
     margin: 0em;

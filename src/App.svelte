@@ -4,10 +4,7 @@
   import { spring } from 'svelte/motion';
   import Card from "./components/Card.svelte";
   import Cube from './components/Cube.svelte';
-	let coords = spring({ x: 50, y: 50 }, {
-		stiffness: 0.07,
-		damping: 0.3
-	});
+
 	let size = spring(10);
 </script>
 
@@ -15,23 +12,10 @@
   on:mousedown="{() => size.set(30)}"
   on:mouseup="{() => size.set(10)}"
 >
-  <Card/>
-  <Card/>
   <Cube/>
 
 	<h1>Svelte Motion Test</h1>
 	<p>The current size is {$size}.</p>
-  <div style="position: absolute; right: 1em;">
-    <label>
-      <h3>stiffness ({coords.stiffness})</h3>
-      <input bind:value={coords.stiffness} type="range" min="0" max="1" step="0.01">
-    </label>
-
-    <label>
-      <h3>damping ({coords.damping})</h3>
-      <input bind:value={coords.damping} type="range" min="0" max="1" step="0.01">
-    </label>
-  </div>
     
 </main>
 
