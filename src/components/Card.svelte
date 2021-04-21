@@ -2,7 +2,7 @@
 	import { spring } from 'svelte/motion';
 	import { pannable } from './pannable.js';
 	export let setCoords = {x: 0, y: 0};
-	const coords = spring({ x: setCoords.x, y: setCoords.y }, {
+	const coords = spring(setCoords, {
 		stiffness: 0.02,
 		damping: 0.4
 	});
@@ -13,7 +13,8 @@
   };
 
 	function handlePanStart() {
-		coords.stiffness = coords.damping = 1;
+		coords.stiffness = 0.1;
+    coords.damping = 0.4;
 	}
 
 	function handlePanMove(event) {
@@ -24,9 +25,9 @@
 	}
 
 	function handlePanEnd(event) {
-		coords.stiffness = 0.2;
+		coords.stiffness = 0.03;
 		coords.damping = 0.4;
-		coords.set({ x: 0, y: 0 });
+		coords.set(setCoords);
 	}
 </script>
 
@@ -43,9 +44,11 @@
 >
   <h2>Monster Name</h2>
   <div class="image">Fake Image</div>
-  <p class="details">STR:</p>
-  <p class="details">WK:</p>
-  <p class="details">PWR:</p>
+  <div class="details">
+    <p>STR:</p>
+    <p>WK:</p>
+    <p>PWR:</p>
+  </div>
   <p>coords: {Math.round($coords.x)},{Math.round($coords.y)}</p>
 </div>
 
@@ -65,7 +68,7 @@
 		border-radius: 4px;
     border: 0.2em solid black;
     border-radius: 0.4em;
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.9);
     display: grid;
     gap: 0;
     align-items: center;
