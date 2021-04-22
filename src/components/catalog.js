@@ -1,6 +1,6 @@
 export const catalog = [
   {
-    id: 1,
+    id: 0,
     name: "Banshee",
     strength: "A Banshee will focus on one player at a time until it kills them or the player leaves the building or the game.",
     weakness: "Banshees fear the Crucifix, which boosts the Hunt-stopping range of one from 3 meters to 5 meters against it.",
@@ -16,7 +16,7 @@ export const catalog = [
     }
   },
   {
-    id: 2,
+    id: 1,
     name: "Demon",
     strength: "Demons are the most aggressive ghosts and will begin Hunts more often.",
     weakness: "Asking a Demon successful questions on the Ouija Board won't lower the user's sanity.",
@@ -32,7 +32,7 @@ export const catalog = [
     }
   },
   {
-    id: 3,
+    id: 2,
     name: "Jinn",
     strength: "A Jinn will travel at a faster speed if its victim is far away.",
     weakness: "Turning off the location's power source will prevent the Jinn from using its ability.",
@@ -48,7 +48,7 @@ export const catalog = [
     }
   },
   {
-    id: 4,
+    id: 3,
     name: "Mare",
     strength: "Increased chance to attack in the dark.",
     weakness: "Turning the lights on will lower its chance to attack.",
@@ -64,7 +64,7 @@ export const catalog = [
     }
   },
   {
-    id: 5,
+    id: 4,
     name: "Oni",
     strength: "Oni are more active when people are nearby and have been seen moving objects at great speed.",
     weakness: "Being more active will make the Oni easier to find and identify.",
@@ -80,7 +80,7 @@ export const catalog = [
     }
   },
   {
-    id: 6,
+    id: 5,
     name: "Phantom",
     strength: "Looking at a Phantom will considerably drop your Sanity. This refers to any visible manifestations of the Phantom, including during a Hunt.",
     weakness: "Taking a photo of the Phantom will make it temporarily disappear. This, however, will not stop a Hunt.",
@@ -96,7 +96,7 @@ export const catalog = [
     }
   },
   {
-    id: 7,
+    id: 6,
     name: "Poltergeist",
     strength: "A Poltergeist is capable of influencing more objects at once than any other Ghosts, and is capable of shutting multiple doors at once.",
     weakness: "A Poltergeist is almost ineffective in an empty room.",
@@ -112,7 +112,7 @@ export const catalog = [
     }
   },
   {
-    id: 8,
+    id: 7,
     name: "Revenant",
     strength: "A Revenant will travel at a significantly faster (2x) speed when hunting a victim. Additionally, the Revenant can freely switch whoever it is targeting during a Hunt.",
     weakness: "Hiding from the Revenant will cause it to move at a significantly reduced (0.5x) speed.",
@@ -128,7 +128,7 @@ export const catalog = [
     }
   },
   {
-    id: 9,
+    id: 8,
     name: "Shade",
     strength: "As a shy ghost, a Shade will rarely perform actions in the presence of two or more people, making it harder to detect.",
     weakness: "Conversely, a Shade will rarely start a Hunt when players are grouped together.",
@@ -144,7 +144,7 @@ export const catalog = [
     }
   },
   {
-    id: 10,
+    id: 9,
     name: "Spirit",
     strength: "The spirit has no discernible strengths, however it is known to increase its hunting as your sanity drops.",
     weakness: "Using Smudge Sticks on a Spirit will stop it attacking for 180 seconds instead of 90.",
@@ -160,7 +160,7 @@ export const catalog = [
     }
   },
   {
-    id: 11,
+    id: 10,
     name: "Wraith",
     strength: "Wraiths almost never touch the ground, but this does not apply to the ghost model. Because of this, footprint sounds from a wraith will be rare to non-existent, and they can travel directly through walls doors without having to open them.",
     weakness: "Wraiths have a toxic reaction to Salt. If a Wraith comes into contact with a pile of salt, Ghost Activity will significantly increase.",
@@ -176,7 +176,7 @@ export const catalog = [
     }
   },
   {
-    id: 12,
+    id: 11,
     name: "Yurei",
     strength: "Yurei have been known to have a stronger effect on people's Sanity during a manifestation.",
     weakness: "Using Smudge Sticks on the Yurei will cause it to not wander around the location for ~90 seconds.",
