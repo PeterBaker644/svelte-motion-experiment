@@ -1,9 +1,9 @@
 <script>
 	import { spring } from 'svelte/motion';
 	import { pannable } from './pannable.js';
-	export let setCoords = {x: 0, y: 0};
-  const dragSpring = {stiffness: 0.1, damping: 0.4}; 
-  const dropSpring = {stiffness: 0.02, damping: 0.4}; 
+  import defineCoords from './defineCoords';
+  // this could be way problematic because the coords are being changed with update.
+	export let id; 
   const stopSpring = {stiffness: 0.02, damping: 0.4};
   // coords are defined here.
 	const coords = spring(setCoords, stopSpring);

@@ -1,15 +1,17 @@
 <script>
   import board, { filters } from "./stores";
   import FilterButton from './FilterButton.svelte'
-  $: ({disabled, hover, hand, graveyard, table} = $board);
+  export let hover, card;
+  $: ({disabled, hand, graveyard, table} = $board);
   $: ({ freeze, emf5, orbs, spiritBox, ghostWriting, fingerprints } = $filters);
   const filterList = Object.keys($filters);
   $: filterValues = Object.values($filters);
 </script>
 
 <div class="tester">
-  <p>Disabled: {disabled}</p>
+  <p>Card: {card}</p>
   <p>Hover: {hover}</p>
+  <p>Disabled: {disabled}</p>
   <p>Hand: {hand}</p>
   <p>Graveyard: {graveyard}</p>
   <p>Table: {table}</p>

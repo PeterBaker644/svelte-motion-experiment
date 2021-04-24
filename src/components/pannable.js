@@ -4,7 +4,6 @@ export function pannable(node) {
 	function handleMousedown(event) {
 		x = event.clientX;
 		y = event.clientY;
-		event.preventDefault();
 		node.dispatchEvent(new CustomEvent('panstart', {
 			detail: { x, y }
 		}));

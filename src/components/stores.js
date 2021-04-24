@@ -16,8 +16,7 @@ const board = () => {
     disabled: [false,false,false,false,false,false,false,false,false,false,false,false],
     "hand": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
     "graveyard": [],
-    "table": [],
-    hover: false
+    "table": []
   }
 
   const { subscribe, set, update } = writable(state);
@@ -59,8 +58,8 @@ const board = () => {
     },
 
     //
-    drop(card) {
-      const destination = state.hover;
+    drop(card, hover) {
+      const destination = hover;
       const location = (state["table"][0] === card) ? "table" : state["hand"].includes(card) ? "hand" : "graveyard";
       if (location === destination) {
       } else if (destination === "table") {
@@ -84,18 +83,12 @@ const board = () => {
       }
     },
 
-    hover(area) {
-      console.log("hovering");
-      update(state => ({...state, hover:area}));
-    },
-
     reset() {
       set({
           disabled: [false,false,false,false,false,false,false,false,false,false,false,false],
           "hand": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
           "graveyard": [],
-          "table": [],
-          hover: false
+          "table": []
         }
       )
     }
