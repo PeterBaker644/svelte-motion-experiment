@@ -2,10 +2,10 @@
 	import { spring } from 'svelte/motion';
 	import { pannable } from './pannable.js';
 	export let setCoords = {x: 0, y: 0};
-	const coords = spring(setCoords, {
-		stiffness: 0.02,
-		damping: 0.4
-	});
+  const dragSpring = {stiffness: 0.1, damping: 0.4}; 
+  const dropSpring = {stiffness: 0.02, damping: 0.4}; 
+  const stopSpring = {stiffness: 0.02, damping: 0.4};
+	const coords = spring(setCoords, stopSpring);
 
   let card = {
     width:200,
@@ -73,6 +73,7 @@
     gap: 0;
     align-items: center;
 		cursor: move;
+    z-index: 1;
 	}
 
   .details {

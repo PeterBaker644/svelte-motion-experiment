@@ -51,9 +51,22 @@ input:disabled {
 }
 
 button {
-	color: #333;
-	background-color: #f4f4f4;
-	outline: none;
+  background: white;
+  color: black;
+  border: 0.2em solid black;
+  border-radius: 0em;
+  cursor: pointer;
+  font-size: 0.5em;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.125em;
+  padding: 0.2rem 0.3rem;
+  position: relative;
+  text-transform: uppercase;
+}
+
+button:hover {
+  background-color: lightgray;
 }
 
 button:disabled {

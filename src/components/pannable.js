@@ -26,6 +26,8 @@ export function pannable(node) {
 	}
 
 	function handleMouseup(event) {
+    // Consider calling board.shuffle() here.
+
 		x = event.clientX;
 		y = event.clientY;
 

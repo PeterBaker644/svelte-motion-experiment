@@ -59,13 +59,15 @@ compare();
 //   //WHILE THIS IS COOL IT DOESN'T EVALUATE UNKNOWN.
 // }
 
-if (card === state.table.cardId) {
-  graveyard = "exclude";
-  state.table.returnTo = "hand";
-  if (cardArray[i] !== entry || cardArray[i] !== "unknown") {
-    state.table.returnTo = "graveyard"; 
-    break;
-  }
-}
+// if (card === state.table.cardId) {
+//   graveyard = "exclude";
+//   state.table.returnTo = "hand";
+//   if (cardArray[i] !== entry || cardArray[i] !== "unknown") {
+//     state.table.returnTo = "graveyard"; 
+//     break;
+//   }
+// }
 
-let newHand, newGraveyard;
+// let newHand, newGraveyard;
+
+// update(state => ({...state, table: {...state.table, returnTo: toGraveyard ? "graveyard" : "hand"}}));

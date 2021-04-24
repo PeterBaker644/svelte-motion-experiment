@@ -1,4 +1,4 @@
-export const catalog = [
+const catalog = [
   {
     id: 0,
     name: "Banshee",
@@ -192,3 +192,5 @@ export const catalog = [
     }
   },
 ]
+
+export default catalog;

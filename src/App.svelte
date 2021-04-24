@@ -3,26 +3,38 @@
 	// export let name;
   import { spring } from 'svelte/motion';
   import Card from './components/Card.svelte';
-  import boardState from './components/stores'
+  import Debugger from './components/Debugger.svelte';
+  import board from './components/stores'
+  // This is temporary for testing.
+	let size = 10;
 
-	let size = spring(10);
+  function handleMouseOver(location) {
+    if (size > 10) {
+      board.hover(location)
+    }
+  }
+
 </script>
 
 <main
-  on:mousedown="{() => size.set(30)}"
-  on:mouseup="{() => size.set(10)}"
+  on:mousedown="{() => size = 20}"
+  on:mouseup="{() => size = 10}"
 >
   <Card setCoords={{x:-100, y:-5}}/>
   <Card setCoords={{x:0, y:0}}/>
   <Card setCoords={{x:100, y:5}}/>
+  
   <!-- reminder to spread cards no more than 100px apart. Can be less but never more. -->
+  <div class="debug">
+    <Debugger/>
+  </div>
   <header>
     <h1>Svelte Motion Test</h1>
   </header>
-  <div id="frame">
+  <div id="frame" on:mouseenter={() => handleMouseOver("table")}>
     <p>Place card here</p>
   </div>
-	<p>The current size is {$size}.</p>
+	<p>The current size is {size}.</p>
     
 </main>
 
@@ -53,13 +65,18 @@
     place-self: center;
     place-content: center;
     color: lightgrey;
-    z-index: -1;
+    z-index: 0;
   }
 
   #frame p {
     position: relative;
     top: 50%;
     margin:0em;
+  }
+
+  .debug {
+    position: absolute;
+    width: 100%;
   }
 
 	@media (min-width: 640px) {
