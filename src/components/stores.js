@@ -2,8 +2,10 @@ import { writable, derived } from 'svelte/store';
 import catalog from './catalog';
 
 export const borders = writable({
-  table: "",
-  hand: ""
+  tableBorder: "",
+  handBorder: "",
+  width: "",
+  height: ""
 })
 
 export const filters = writable({
@@ -30,7 +32,8 @@ const board = () => {
   const methods = {
 
     // Recalculates which cards are filtered and where they ought to be.
-    shuffle(filters) {
+    shuffle(filters, {table}) {
+      console.log("==== Shuffle started ====");
       let cards = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
       let hand = [], graveyard = [], disabled = [];
       console.log("What is filters?", filters)
@@ -49,8 +52,8 @@ const board = () => {
           }
         };
         // Add each card to destination list and track whether it is disabled.
-        if (card === state["table"][0]) {
-          // Doesn't actually work because of unreadable state.
+        if (card === table[0]) {
+          // Doesn't actually work because of unreadable 
           console.log("table card detected")
           disabled.push(toGraveyard);
         } else if (toGraveyard === false) {
@@ -62,33 +65,37 @@ const board = () => {
         };
       };
       console.log("hand:",hand,"graveyard:",graveyard,"disabled:",disabled)
-      update(state => ({...state, "disabled":disabled, "hand":hand, "graveyard":graveyard}));
+      update(state => ({...state, "disabled":disabled, "hand":hand, "graveyard":graveyard})
+      );
+      console.log("==== Shuffle ended ====");
     },
 
     //
-    drop(card, hover) {
+    drop(card, hover, {disabled, table, hand}) {
       //
-      // This is a completely broken function. It will never return properly because state is never updated.
+      // This is a completely broken function. It will never return properly because state is never updated. It needs to live in a svelte component so it can properly listen to the board state.
       //
+      console.log("==== Drop started ====");
       const destination = hover;
-      const location = (state.table[0] === card) ? "table" : state.hand.includes(card) ? "hand" : "graveyard";
+      const location = (table[0] === card) ? "table" : hand.includes(card) ? "hand" : "graveyard";
       console.log("Calculating Drop ...")
       console.log("destination: ", destination, "location: ", location, "card: ", card);
       if (location === destination) {
-      } else if (destination === "table" && state["table"].length > 0) {
+      } else if (destination === "table" && table.length > 0) {
         // add the card to the table, move the table card to wherever.
-        let tableCardState = state.disabled[state["table"][0]];
+        let tableCardState = disabled[table[0]];
         let locList = [...state[tableCardState ? "graveyard" : "hand"]]
-        locList.push(state["table"]);
+        locList.push(table);
         update(state => ({...state, ["table"]:card, [tableCardState ? "graveyard" : "hand"]:locList}));
       } else {
         // remove the card from the location and add to the destination.
         let locList = [...state[location]], destList = [...state[destination]];
-        console.log("location:", location, locList);
+        console.log("locList:", locList);
         locList.splice(locList.indexOf(card),1);
         // there could be a quicksort here.
         destList.push(card);
         update(state => ({...state, [location]:locList, [destination]:destList}));
+        console.log("==== Drop Complete ====")
       }
     },
 

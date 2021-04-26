@@ -1,18 +1,13 @@
 <script>
   import Card from "./Card.svelte";
-  import CardNew from "./CardNew.svelte";
   import Debugger from "./Debugger.svelte";
+  import catalog from './catalog';
   
   let size = 10,
     hover = "hand",
-    cardX = -100,
     card = 1;
   // let tablex = document.getElementById("table").clientWidth;
   // let tabley = document.getElementById("table").clientHeight;
-  
-  function pickupCard(id) {
-    card = id;
-  }
 
 </script>
 
@@ -33,22 +28,21 @@
   <div id="graveyard" />
   <div id="hand">
     <p>The current size is {size}.</p>
-    <p>The current cardX is {cardX}.</p>
-    <button
-      on:click={() => {
-        cardX = -200;
-      }}>Change</button
-    >
   </div>
-
-  <Card id={1} setCoords={{ x: cardX, y: -5 }} />
-  <Card id={2} setCoords={{ x: 0, y: 0 }} />
+  <ul>
+    {#each catalog as card}
+      <Card info={card}/>
+    {/each}
+  </ul>
+  <!-- <Card id={1}/>
+  <Card id={2}/> -->
   <!-- <Card setCoords={{x:100, y:5}}/>   -->
-  <CardNew id={3} setCoords={{ x: 100, y: 5 }} />
+  <!-- <CardNew id={3} setCoords={{ x: 100, y: 5 }} /> -->
 </main>
 
 <style>
   main {
+    position: relative;
     text-align: center;
     max-width: 240px;
     margin: 0em;

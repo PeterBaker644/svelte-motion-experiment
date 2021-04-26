@@ -1,7 +1,6 @@
 <script>
 	import { spring } from 'svelte/motion';
 	import { borders } from './stores.js';
-  import defineCoords from './defineCoords';
   export let setCoords = {x: 0, y: 0};
   // this could be way problematic because the coords are being changed with update.
 	// export let id; 

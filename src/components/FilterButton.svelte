@@ -9,7 +9,7 @@ export let filterInfo = {
 const updateFilters = (value) => {
   console.log("You clicked the button");
   filters.update(filters => ({...filters, [filterInfo.type]:value}));
-  board.shuffle($filters);
+  board.shuffle($filters, $board);
 };
 // Needs to react to the state of the filter. 
 </script>

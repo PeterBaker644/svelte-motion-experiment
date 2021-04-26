@@ -2,7 +2,8 @@
   import { onMount } from 'svelte';
   import board, { filters } from "./stores";
   import FilterButton from './FilterButton.svelte'
-  export let hover, card, mousex, mousey;
+  export let hover, card;
+  let mousex, mousey;
   $: ({disabled, hand, graveyard, table} = $board);
   $: ({ freeze, emf5, orbs, spiritBox, ghostWriting, fingerprints } = $filters);
   const filterList = Object.keys($filters);
@@ -51,6 +52,7 @@
   .tester {
     text-align: left;
     position: absolute;
+    z-index: 0;
   }
   p {
     font-size: small;

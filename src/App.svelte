@@ -7,9 +7,12 @@
     let tableBorder = document.getElementById("table").clientWidth;
     let handBorder = 100 + document.getElementById("table").clientHeight;
     borders.set({
-      table: tableBorder,
-      hand: handBorder,
+      tableBorder: tableBorder,
+      handBorder: handBorder,
+      width: window.innerWidth,
+      height: window.innerHeight
     });
+    console.log("resizing");
   }
 
   onMount(() => {setBoundaries()});
