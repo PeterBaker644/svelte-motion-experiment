@@ -1,12 +1,21 @@
 <script>
+  import { onMount } from 'svelte';
   import board, { filters } from "./stores";
   import FilterButton from './FilterButton.svelte'
-  export let hover, card;
+  export let hover, card, mousex, mousey;
   $: ({disabled, hand, graveyard, table} = $board);
   $: ({ freeze, emf5, orbs, spiritBox, ghostWriting, fingerprints } = $filters);
   const filterList = Object.keys($filters);
   $: filterValues = Object.values($filters);
+
+  function setMouse (event) {
+    mousex = event.clientX;
+    mousey = event.clientY;
+  }
+
 </script>
+
+<svelte:window on:mousemove={setMouse}/>
 
 <div class="tester">
   <p>Card: {card}</p>
@@ -15,6 +24,8 @@
   <p>Hand: {hand}</p>
   <p>Graveyard: {graveyard}</p>
   <p>Table: {table}</p>
+  <!-- <p>Table Size: table{tableBorder} hand{handBorder}</p> -->
+  <p>Mouse x:{mousex} y:{mousey}</p>
   <br />
   <p>Freeze: {freeze}</p>
   <p>emf5: {emf5}</p>

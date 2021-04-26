@@ -1,56 +1,70 @@
 <script>
 	import { spring } from 'svelte/motion';
-	import { pannable } from './pannable.js';
+	import { borders } from './stores.js';
   import defineCoords from './defineCoords';
+  export let setCoords = {x: 0, y: 0};
   // this could be way problematic because the coords are being changed with update.
-	export let id; 
+	// export let id; 
   const stopSpring = {stiffness: 0.02, damping: 0.4};
   // coords are defined here.
 	const coords = spring(setCoords, stopSpring);
-
+  let x,y;
   let card = {
     width:200,
     height:280
   };
 
-	function handlePanStart() {
+	function handleMouseDown(event) {
+    event.preventDefault();
 		coords.stiffness = 0.1;
     coords.damping = 0.4;
+    x = event.clientX;
+		y = event.clientY;
+		window.addEventListener('mousemove', handleMousemove);
+    window.addEventListener('mouseup', handleMouseup);
 	}
 
-	function handlePanMove(event) {
+	function handleMousemove(event) {
+    const dx = event.clientX - x;
+		const dy = event.clientY - y;
 		coords.update($coords => ({
-			x: $coords.x + event.detail.dx,
-			y: $coords.y + event.detail.dy
+			x: $coords.x + dx,
+			y: $coords.y + dy
 		}));
+    x = event.clientX;
+		y = event.clientY;
 	}
 
-	function handlePanEnd(event) {
+	function handleMouseup(event) {
 		coords.stiffness = 0.03;
 		coords.damping = 0.4;
+
     // setCoords replaces the current coords with the origin.
 		coords.set(setCoords);
+    x = event.clientX;
+		y = event.clientY;
+    window.removeEventListener('mousemove', handleMousemove);
+    window.removeEventListener('mouseup', handleMouseup);
 	}
+
 </script>
 
 <div class="card"
-	use:pannable
-	on:panstart={handlePanStart}
-	on:panmove={handlePanMove}
-	on:panend={handlePanEnd}
+	on:mousedown={handleMouseDown}
 	style="transform:
 		translate({$coords.x}px,{$coords.y}px)
 		rotate({($coords.x * 0.1)}deg);
     height:{card.height}px;
     width:{card.width}px;"
 >
-  <h2>Monster Name</h2>
+  <h2>New Version</h2>
   <div class="image">Fake Image</div>
   <div class="details">
     <p>STR:</p>
     <p>WK:</p>
     <p>PWR:</p>
   </div>
+  <p>x: {x} y: {y}</p>
   <p>coords: {Math.round($coords.x)},{Math.round($coords.y)}</p>
 </div>
 

@@ -1,61 +1,57 @@
 <script>
-  import Card from './Card.svelte';
-  import Debugger from './Debugger.svelte';
-  import board from './stores';
-	let size = 10, hover = "hand", card = 1;
-
-  let cardX = -100;
-
-  function handleMouseOver(location) {
-      hover = location;
-  }
-
+  import Card from "./Card.svelte";
+  import CardNew from "./CardNew.svelte";
+  import Debugger from "./Debugger.svelte";
+  
+  let size = 10,
+    hover = "hand",
+    cardX = -100,
+    card = 1;
+  // let tablex = document.getElementById("table").clientWidth;
+  // let tabley = document.getElementById("table").clientHeight;
+  
   function pickupCard(id) {
-    card = id
+    card = id;
   }
 
-  function defineCoords(){
-    // read in the lists in from the board state.
-    // for each list
-  }
 </script>
 
-<main
-  on:mousedown="{() => size = 20}"
-  on:mouseup="{() => size = 10}"
->
 
+
+<main on:mousedown={() => (size = 20)} on:mouseup={() => (size = 10)}>
   <!-- reminder to spread cards no more than 100px apart. Can be less but never more. -->
 
   <div class="debug">
-    <Debugger {card} {hover}/>
+    <Debugger {card} {hover} />
   </div>
 
-  <div id="table" on:mouseover={() => handleMouseOver("table")}>
+  <div id="table">
     <div id="frame">
       <p>Place card here</p>
     </div>
   </div>
-  <div id="graveyard" on:mouseover={() => handleMouseOver("graveyard")}>
-  </div>
-  <div id="hand" on:mouseover={() => handleMouseOver("hand")}>
+  <div id="graveyard" />
+  <div id="hand">
     <p>The current size is {size}.</p>
     <p>The current cardX is {cardX}.</p>
-    <button on:click={() => {cardX = -200}}>Change</button>
+    <button
+      on:click={() => {
+        cardX = -200;
+      }}>Change</button
+    >
   </div>
 
- 
-  <Card setCoords={{x:cardX, y:-5}}/>
-  <Card setCoords={{x:0, y:0}}/>
-  <Card setCoords={{x:100, y:5}}/>  
-    
+  <Card id={1} setCoords={{ x: cardX, y: -5 }} />
+  <Card id={2} setCoords={{ x: 0, y: 0 }} />
+  <!-- <Card setCoords={{x:100, y:5}}/>   -->
+  <CardNew id={3} setCoords={{ x: 100, y: 5 }} />
 </main>
 
 <style>
-	main {
-		text-align: center;
-		max-width: 240px;
-		margin: 0 auto;
+  main {
+    text-align: center;
+    max-width: 240px;
+    margin: 0em;
     width: 100%;
     height: 100%;
     display: grid;
@@ -64,7 +60,7 @@
       "hand hand";
     grid-template-rows: 70% 1fr;
     grid-template-columns: 1fr 300px;
-	}
+  }
 
   #frame {
     height: 350px;
@@ -90,13 +86,13 @@
 
   #table {
     grid-area: table;
-    background-color:burlywood;
+    background-color: burlywood;
   }
 
   #table p {
     position: relative;
     top: 50%;
-    margin:0em;
+    margin: 0em;
   }
 
   .debug {
@@ -104,9 +100,9 @@
     width: 100%;
   }
 
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
+  @media (min-width: 640px) {
+    main {
+      max-width: none;
+    }
+  }
 </style>
