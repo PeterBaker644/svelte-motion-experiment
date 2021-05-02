@@ -1,6 +1,7 @@
 <script>
 	import { spring } from 'svelte/motion';
-  import board, { borders } from './stores.js';
+  import { board, borders } from './stores.js';
+  import { drop } from "./boardMethods";
   import defineCoords from './defineCoords.js';
 	import { pannable } from './pannable.js';
 	export let info;
@@ -44,7 +45,7 @@
 	function handlePanEnd(event) {
     hover = calcHover(event);
     console.log("Hover puts destination at:", hover);
-    board.drop(info.id, hover, $board);
+    drop(info.id, hover, $board, board);
 		coords.stiffness = 0.03;
 		coords.damping = 0.4;
     // newCoords replaces the current coords with the origin.
@@ -62,7 +63,7 @@
 		translate({$coords.x}px,{$coords.y}px)
 		rotate({$coords.rotation}deg);"
 >
-  <h2>{info.name}</h2>
+  <h2>{info.name}{info.id}</h2>
   <div class="image">Fake Image</div>
   <div class="details">
     <p>hover: {hover}</p>
