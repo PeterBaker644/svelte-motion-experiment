@@ -1,5 +1,8 @@
 import catalog from './catalog';
 // Recalculates which cards are filtered and where they ought to be.
+
+const sorter = (a,b) => a-b;
+
 export function shuffle(filters, {table}, board) {
   console.log("==== Shuffle started ====");
   let cards = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
@@ -48,26 +51,42 @@ export function drop(card, hover, currentBoard, board) {
   const { disabled, table, hand } = currentBoard;
   const destination = hover;
   const location = (table[0] === card) ? "table" : hand.includes(card) ? "hand" : "graveyard";
-  console.log("Calculating Drop ...")
-  console.log("destination: ", destination, "location: ", location, "card: ", card);
+  let locList = [...currentBoard[location]], 
+      destList = [...currentBoard[destination]];
   if (location === destination) {
+    // Do Nothing.
   } else if (destination === "table" && table.length > 0) {
     // add the card to the table, move the table card to wherever.
-    let tableCardState = disabled[table[0]];
-    let locList = [...currentBoard[tableCardState ? "graveyard" : "hand"]]
-    locList.push(table);
-    board.update(board => ({ ...board, ["table"]: card, [tableCardState ? "graveyard" : "hand"]: locList }));
+    let tableCardDest = disabled[table[0]] ? "graveyard" : "hand";
+    if (tableCardDest === location) {
+      // add the table card to the loclist
+      locList.splice(locList.indexOf(card), 1);
+      locList.push(table[0]);
+      locList.sort(sorter);
+      console.log(locList);
+      board.update(board => ({...board, table: [card], [location]: locList}))
+      // update the hand with the table card and the updated location list.
+    } else {
+      let returnList = [...currentBoard[tableCardDest]]
+      // add the table card to the loclist
+      // remove the card from the tableCardDest list
+      // update all three lists
+      locList.splice(locList.indexOf(card), 1);
+      returnList.push(table[0]);
+      returnList.sort(sorter);
+      board.update(board => ({...board, table: [card], [tableCardDest]: returnList, [location]: locList }));
+    }
+    
   } else {
     // remove the card from the location and add to the destination.
     // having an issue here ("not iterable")
-    let locList = [...currentBoard[location]], destList = [...currentBoard[destination]];
     console.log("locList:", locList);
     locList.splice(locList.indexOf(card), 1);
-    // there could be a quicksort here.
     destList.push(card);
+    destList.sort(sorter);
     board.update(board => ({ ...board, [location]: locList, [destination]: destList }));
-    console.log("==== Drop Complete ====")
   }
+  console.log("==== Drop Complete ====")
 };
 
 export function reset() {

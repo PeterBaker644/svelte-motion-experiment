@@ -21,12 +21,16 @@
   </div>
 
   <div id="table">
+    <h1 style='position:absolute'>Table</h1>
     <div id="frame">
       <p>Place card here</p>
     </div>
   </div>
-  <div id="graveyard" />
+  <div id="graveyard">
+    <h1 style='position:absolute'>Graveyard</h1>
+  </div>
   <div id="hand">
+    <h1 style='position:absolute'>Hand</h1>
     <p>The current size is {size}.</p>
   </div>
   <ul>
@@ -34,10 +38,6 @@
       <Card info={card}/>
     {/each}
   </ul>
-  <!-- <Card id={1}/>
-  <Card id={2}/> -->
-  <!-- <Card setCoords={{x:100, y:5}}/>   -->
-  <!-- <CardNew id={3} setCoords={{ x: 100, y: 5 }} /> -->
 </main>
 
 <style>
@@ -54,6 +54,10 @@
       "hand hand";
     grid-template-rows: 70% 1fr;
     grid-template-columns: 1fr 300px;
+  }
+
+  h1 {
+    color: black;
   }
 
   #frame {

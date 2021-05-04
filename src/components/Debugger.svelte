@@ -1,6 +1,4 @@
 <script>
-  import { onMount } from 'svelte';
-  import catalog from './catalog';
   import  { board, filters } from "./stores";
   import FilterButton from './FilterButton.svelte'
   export let hover, card;
@@ -15,44 +13,7 @@
     mousey = event.clientY;
   }
 
-  // Recalculates which cards are filtered and where they ought to be.
- function shuffle(filters) {
-  console.log("==== Shuffle started ====");
-  let cards = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-  let handArray = [], graveyardArray = [], disabledArray = [];
-  console.log("What is filters?", filters)
-  for (let card of cards) {
-    const filterArray = Object.values(filters);
-    const cardArray = Object.values(catalog[card].evidence);
-    let toGraveyard = false;
-    // compare each line of evidence to the evidence provided by the filters.
-    for (let i = 0; i < filterArray.length; i++) {
-      let entry = filterArray[i];
-      // console.log("Entry =", entry, "compared to = ", cardArray[i])
-      if (entry !== "unknown" && entry !== cardArray[i]) {
-        console.log("Adding to graveyard");
-        toGraveyard = true;
-        break;
-      }
-    };
-    // Add each card to destination list and track whether it is disabled.
-    if (card === table[0]) {
-      // Doesn't actually work because of unreadable state
-      console.log("table card detected")
-      disabledArray.push(toGraveyard);
-    } else if (toGraveyard === false) {
-      handArray.push(card);
-      disabledArray.push(toGraveyard);
-    } else {
-      graveyardArray.push(card);
-      disabledArray.push(toGraveyard);
-    };
-  };
-  console.log("hand:", handArray, "graveyard:", graveyardArray, "disabled:", disabledArray)
-  update(board => ({ ...board, "disabled": disabledArray, "hand": handArray, "graveyard": graveyardArray })
-  );
-  console.log("==== Shuffle ended ====");
-};
+  
 
 </script>
 
@@ -79,7 +40,7 @@
   {#each filterList as filter, i}
     <FilterButton filterInfo={{ name: filter, type: filter, state: filterValues[i]}} />
   {/each}
-  <button class="white" on:click="{()=>console.log($filters)}">Test</button>
+  <button class="white" on:click="{()=>console.log($board)}">Test</button>
 </div>
 
 
