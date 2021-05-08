@@ -60,6 +60,7 @@ export function drop(card, hover, currentBoard, board) {
       locList.push(table[0]);
       locList.sort(sorter);
       console.log(locList);
+      // UPDATE
       board.update(board => ({...board, table: [card], [location]: locList}))
       // update the hand with the table card and the updated location list.
     } else {
@@ -70,6 +71,7 @@ export function drop(card, hover, currentBoard, board) {
       locList.splice(locList.indexOf(card), 1);
       returnList.push(table[0]);
       returnList.sort(sorter);
+      // UPDATE
       board.update(board => ({...board, table: [card], [tableCardDest]: returnList, [location]: locList }));
     }
     
@@ -79,6 +81,7 @@ export function drop(card, hover, currentBoard, board) {
     locList.splice(locList.indexOf(card), 1);
     destList.push(card);
     destList.sort(sorter);
+    // UPDATE
     board.update(board => ({ ...board, [location]: locList, [destination]: destList }));
   }
   console.log("==== Drop Complete ====")

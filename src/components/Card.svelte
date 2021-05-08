@@ -36,11 +36,12 @@
     }
   }
 
-  function handlePanStart() {
+  function handlePanStart(event) {
+    hover = calcHover(event);
     click = true;
     coords.stiffness = 0.1;
     coords.damping = 0.4;
-    setTimeout(() => click = false, 100);
+    setTimeout(() => click = false, 200);
   }
 
   function handlePanMove(event) {
@@ -56,8 +57,6 @@
       hover = disabled[info.id] ? "graveyard" : "hand";
     } else if (click) {
       hover = "table";
-    } else {
-      hover = calcHover(event);
     };
     click = true;
     drop(info.id, hover, $board, board);
