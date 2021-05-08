@@ -1,5 +1,5 @@
 
-function defineCoords(card, {hand, graveyard, table}, {width, height}){
+function defineCoords(card, {hand, graveyard}, {width, height}){
   let x, y, rotation;
   if (hand.includes(card)) {
     // Hand Placement

@@ -5,7 +5,7 @@ export const borders = writable({
   handBorder: "",
   width: "",
   height: ""
-})
+});
 
 export const filters = writable({
   freeze: "unknown",
@@ -15,7 +15,6 @@ export const filters = writable({
   ghostWriting: "unknown",
   fingerprints: "unknown"
 });
-
 
 export const board = writable({
   disabled: [false, false, false, false, false, false, false, false, false, false, false, false],

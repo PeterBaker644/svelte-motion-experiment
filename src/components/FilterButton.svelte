@@ -30,7 +30,7 @@ const updateFilters = (value) => {
 </div>
 
 <style>
-h3 {
+  h3 {
     display: inline;
     margin: 0em;
   }

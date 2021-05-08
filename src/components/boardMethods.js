@@ -43,10 +43,6 @@ export function shuffle(filters, {table}, board) {
 
 
 export function drop(card, hover, currentBoard, board) {
-  //
-  // Needs to be tweaked to sort the cards every time something is updated. 
-  // Introduce a sorting function to handle this..
-  //
   console.log("==== Drop started ====");
   const { disabled, table, hand } = currentBoard;
   const destination = hover;
@@ -79,7 +75,6 @@ export function drop(card, hover, currentBoard, board) {
     
   } else {
     // remove the card from the location and add to the destination.
-    // having an issue here ("not iterable")
     console.log("locList:", locList);
     locList.splice(locList.indexOf(card), 1);
     destList.push(card);
@@ -95,7 +90,6 @@ export function reset() {
     "hand": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
     "graveyard": [],
     "table": []
-  }
-  )
+  })
 };
 

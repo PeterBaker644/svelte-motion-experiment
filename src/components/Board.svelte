@@ -11,8 +11,6 @@
 
 </script>
 
-
-
 <main on:mousedown={() => (size = 20)} on:mouseup={() => (size = 10)}>
   <!-- reminder to spread cards no more than 100px apart. Can be less but never more. -->
 
