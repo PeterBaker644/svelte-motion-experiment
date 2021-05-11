@@ -13,8 +13,8 @@ function defineCoords(card, {hand, graveyard}, {width, height}){
   } else if (graveyard.includes(card)) {
     // Graveyard Placement
     x = width - 250;
-    y = 25 + (50 * graveyard.indexOf(card));
-    y += 200;
+    y = 50 + (50 * graveyard.indexOf(card));
+    // y += 200;
     rotation = 0;
   } else {
     // Table Placement

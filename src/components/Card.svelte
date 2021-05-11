@@ -57,6 +57,8 @@
       hover = disabled[info.id] ? "graveyard" : "hand";
     } else if (click) {
       hover = "table";
+    } else {
+      hover = calcHover(event);
     };
     click = true;
     drop(info.id, hover, $board, board);
@@ -64,6 +66,7 @@
     coords.damping = 0.4;
     coords.set(newCoords);
   }
+
 </script>
 
 <div

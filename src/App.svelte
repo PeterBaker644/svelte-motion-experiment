@@ -22,7 +22,9 @@
 
 <div class="container">
   <header>
-    <h1>Svelte Motion Test</h1>
+    <h1>
+      Svelte Motion Test
+    </h1>
   </header>
   <Board />
 </div>

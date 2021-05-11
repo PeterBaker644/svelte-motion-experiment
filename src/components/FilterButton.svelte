@@ -13,7 +13,6 @@ const updateFilters = (value) => {
   shuffle($filters, $board, board);
 };
 
-// Needs to react to the state of the filter. 
 </script>
 
 <div class="filter">

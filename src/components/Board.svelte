@@ -1,35 +1,41 @@
 <script>
   import Card from "./Card.svelte";
   import Debugger from "./Debugger.svelte";
+  import { board } from "./stores"
   import catalog from './catalog';
+import TableData from "./TableData.svelte";
   
-  let size = 10,
+  let 
     hover = "hand",
     card = 1;
   // let tablex = document.getElementById("table").clientWidth;
   // let tabley = document.getElementById("table").clientHeight;
 
+  $: ({ table } = $board);
+  $: currentCard = catalog[table[0]];
+
 </script>
 
-<main on:mousedown={() => (size = 20)} on:mouseup={() => (size = 10)}>
-  <!-- reminder to spread cards no more than 100px apart. Can be less but never more. -->
+<main>
 
-  <div class="debug">
+  <!-- <div class="debug">
     <Debugger {card} {hover} />
-  </div>
+  </div> -->
 
   <div id="table">
-    <h1 style='position:absolute'>Table</h1>
+    <h2 style='position:absolute'>Table</h2>
     <div id="frame">
       <p>Place card here</p>
     </div>
+    
+      <TableData card={currentCard || ""}/>
+    
   </div>
   <div id="graveyard">
-    <h1 style='position:absolute'>Graveyard</h1>
+    <h2 style='position:absolute'>Graveyard</h2>
   </div>
   <div id="hand">
-    <h1 style='position:absolute'>Hand</h1>
-    <p>The current size is {size}.</p>
+    <h2 style='position:absolute'>Hand</h2>
   </div>
   <ul>
     {#each catalog as card}
@@ -54,18 +60,20 @@
     grid-template-columns: 1fr 300px;
   }
 
-  h1 {
+  h2 {
     color: black;
+    margin: 0;
+    padding: 0.25em 0.5em;
   }
 
   #frame {
-    height: 350px;
-    width: 275px;
-    border: 0.2em solid lightgrey;
+    height: 375px;
+    width: 300px;
+    border: 0.2em solid grey;
     border-radius: 0.4em;
     place-self: center;
     place-content: center;
-    color: lightgrey;
+    color: grey;
     z-index: 0;
   }
 
