@@ -27,9 +27,7 @@ import TableData from "./TableData.svelte";
     <div id="frame">
       <p>Place card here</p>
     </div>
-    
-      <TableData card={currentCard || ""}/>
-    
+    <TableData card={currentCard || ""}/>
   </div>
   <div id="graveyard">
     <h2 style='position:absolute'>Graveyard</h2>
@@ -71,8 +69,8 @@ import TableData from "./TableData.svelte";
     width: 300px;
     border: 0.2em solid grey;
     border-radius: 0.4em;
-    place-self: center;
-    place-content: center;
+    /* place-self: center;
+    place-content: center; */
     color: grey;
     z-index: 0;
   }
@@ -91,13 +89,15 @@ import TableData from "./TableData.svelte";
   #table {
     grid-area: table;
     background-color: burlywood;
+    display: grid;
+    grid-template-columns: 300px 1fr;
   }
 
-  #table p {
+  /* #table p {
     position: relative;
     top: 50%;
     margin: 0em;
-  }
+  } */
 
   .debug {
     position: absolute;

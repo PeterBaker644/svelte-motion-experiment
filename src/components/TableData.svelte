@@ -31,6 +31,10 @@ div {
   margin: 1em 0 0 0;
 }
 
+section {
+  padding: 0 1em;
+}
+
 .detail {
   color: dimgray
 }
