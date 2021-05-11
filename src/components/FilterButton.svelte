@@ -10,7 +10,7 @@ export let filterInfo = {
 const updateFilters = (value) => {
   console.log("You clicked the button");
   filters.update(filters => ({...filters, [filterInfo.type]:value}));
-  shuffle($filters, $board, board);
+  shuffle($filters, $board);
 };
 
 </script>

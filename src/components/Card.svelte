@@ -61,7 +61,7 @@
       hover = calcHover(event);
     };
     click = true;
-    drop(info.id, hover, $board, board);
+    drop(info.id, hover, $board);
     coords.stiffness = 0.03;
     coords.damping = 0.4;
     coords.set(newCoords);

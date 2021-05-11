@@ -1,13 +1,12 @@
 import catalog from './catalog';
-// Recalculates which cards are filtered and where they ought to be.
+import { board } from './stores';
 
 const sorter = (a,b) => a-b;
 
-export function shuffle(filters, {table}, board) {
+export function shuffle(filters, {table}) {
   console.log("==== Shuffle started ====");
   let cards = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
   let handArray = [], graveyardArray = [], disabledArray = [];
-  console.log("What is filters?", filters)
   for (let card of cards) {
     const filterArray = Object.values(filters);
     const cardArray = Object.values(catalog[card].evidence);
@@ -24,7 +23,6 @@ export function shuffle(filters, {table}, board) {
     };
     // Add each card to destination list and track whether it is disabled.
     if (card === table[0]) {
-      // Doesn't actually work because of unreadable state
       console.log("table card detected")
       disabledArray.push(toGraveyard);
     } else if (toGraveyard === false) {
@@ -42,7 +40,7 @@ export function shuffle(filters, {table}, board) {
 };
 
 
-export function drop(card, hover, currentBoard, board) {
+export function drop(card, hover, currentBoard) {
   console.log("==== Drop started ====");
   const { disabled, table, hand } = currentBoard;
   const destination = hover;
@@ -88,7 +86,8 @@ export function drop(card, hover, currentBoard, board) {
 };
 
 export function reset() {
-  set({
+  console.log("resetting");
+  board.set({
     disabled: [false, false, false, false, false, false, false, false, false, false, false, false],
     "hand": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
     "graveyard": [],

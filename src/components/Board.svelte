@@ -3,7 +3,8 @@
   import Debugger from "./Debugger.svelte";
   import { board } from "./stores"
   import catalog from './catalog';
-import TableData from "./TableData.svelte";
+  import TableData from "./TableData.svelte";
+  export let debug = false;
   
   let 
     hover = "hand",
@@ -18,9 +19,11 @@ import TableData from "./TableData.svelte";
 
 <main>
 
-  <!-- <div class="debug">
+  {#if debug}
+  <div class="debug">
     <Debugger {card} {hover} />
-  </div> -->
+  </div>
+  {/if}
 
   <div id="table">
     <h2 style='position:absolute'>Table</h2>
@@ -93,11 +96,11 @@ import TableData from "./TableData.svelte";
     grid-template-columns: 300px 1fr;
   }
 
-  /* #table p {
+  #frame p {
     position: relative;
     top: 50%;
     margin: 0em;
-  } */
+  }
 
   .debug {
     position: absolute;

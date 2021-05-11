@@ -12,14 +12,12 @@
     mousex = event.clientX;
     mousey = event.clientY;
   }
-
   
-
 </script>
 
 <svelte:window on:mousemove={setMouse}/>
 
-<div class="tester">
+<div class="readout">
   <p>Card: {card}</p>
   <p>Hover: {hover}</p>
   <p>Disabled: {disabled}</p>
@@ -36,7 +34,7 @@
   <p>Ghost Writing: {ghostWriting}</p>
   <p>Fingerprints: {fingerprints}</p>
 </div>
-<div class="tester2">
+<div class="filter-buttons">
   {#each filterList as filter, i}
     <FilterButton filterInfo={{ name: filter, type: filter, state: filterValues[i]}} />
   {/each}
@@ -45,15 +43,19 @@
 
 
 <style>
-  .tester2 {
+  * {
+    z-index: 4;
+  }
+  .filter-buttons {
     text-align: right;
     margin-right: 0.5em;
+    position: absolute;
+    right: 0;
     /* backdrop-filter: blur(2px); */
   }
-  .tester {
+  .readout {
     text-align: left;
     position: absolute;
-    z-index: 0;
   }
   p {
     font-size: small;
